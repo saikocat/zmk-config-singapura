@@ -1,0 +1,61 @@
+# Copyright 2023 saikocat (@saikocat)
+# SPDX-License-Identifier: MIT
+
+if SHIELD_SINGAPURA_LEFT
+
+    config ZMK_KEYBOARD_NAME
+        default "Singapura"
+
+    config ZMK_SPLIT_ROLE_CENTRAL
+        default y
+
+endif # LEFT
+
+
+
+
+if SHIELD_SINGAPURA_LEFT || SHIELD_SINGAPURA_RIGHT
+
+    config ZMK_SPLIT
+        default y
+
+    config ZMK_RGB_UNDERGLOW
+        select WS2812_STRIP
+        select SPI
+
+    config ZMK_DISPLAY
+
+    if ZMK_DISPLAY
+
+        config I2C
+            default y
+
+        config SSD1306
+            default y
+
+        config SSD1306_REVERSE_MODE
+            default y
+
+    endif # ZMK_DISPLAY
+
+
+    if LVGL
+
+        config LV_Z_VDB_SIZE
+            default 64
+
+        config LV_Z_DPI
+            default 148
+
+        config LV_Z_BITS_PER_PIXEL
+            default 1
+
+        choice LV_COLOR_DEPTH
+            default LV_COLOR_DEPTH_1
+        endchoice
+
+    endif # LVGL
+
+endif # LEFT RIGHT
+
+# vim: et
